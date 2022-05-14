@@ -37,7 +37,7 @@
             align-items: center;
             flex-wrap: wrap;
             margin: auto;
-            max-width: 55vh;
+            max-width: 62rem;
         }
 
         .slide__radio {
@@ -65,7 +65,7 @@
             flex-grow: 1;
             display: flex;
             overflow: hidden;
-            max-width: calc(100% - 20rem);
+            max-width: calc(100% - 15rem);
         }
         .slider__label-container{
             display: flex;
@@ -100,6 +100,45 @@
         .slider__control:hover .slider__control-icon{
             border-color: #f3e138;
             background-color: #f3e138;
+        }
+
+        #slide1:checked ~ .slider__control-wrapper [for="slide1"] .slider__control-icon{
+            background-color: transparent;
+        }
+        #slide2:checked ~ .slider__control-wrapper [for="slide2"] .slider__control-icon{
+            background-color: transparent;
+        }
+        #slide3:checked ~ .slider__control-wrapper [for="slide3"] .slider__control-icon{
+            background-color: transparent;
+        }
+        #slide4:checked ~ .slider__control-wrapper [for="slide4"] .slider__control-icon{
+            background-color: transparent;
+        }
+
+        #slide1:checked ~ .slider__image-wrapper .slider__image-container{
+            transform: translateX(0);
+        }
+        #slide2:checked ~ .slider__image-wrapper .slider__image-container{
+            transform: translateX(calc(-100% - 2rem));
+        }
+        #slide3:checked ~ .slider__image-wrapper .slider__image-container{
+            transform: translateX(calc(-200% - 4rem));
+        }
+        #slide4:checked ~ .slider__image-wrapper .slider__image-container{
+            transform: translateX(calc(-300% - 6rem));
+        }
+
+        #slide1:checked ~ .slider__label-wrapper .slider__label-container{
+            transform: translateX(0);
+        }
+        #slide2:checked ~ .slider__label-wrapper .slider__label-container{
+            transform: translateX(calc(-100% - 1rem));
+        }
+        #slide3:checked ~ .slider__label-wrapper .slider__label-container{
+            transform: translateX(calc(-200% - 2rem));
+        }
+        #slide4:checked ~ .slider__label-wrapper .slider__label-container{
+            transform: translateX(calc(-300% - 3rem));
         }
     </style>
 </head>
