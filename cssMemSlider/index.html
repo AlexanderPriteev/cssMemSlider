@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <title>cssMemSlider</title>
+    <style>
+        html {
+            font-size: .5vw;
+            font-family: "Roboto", sans-serif;
+        }
+
+        body {
+            background-color: #ffffee;
+            margin: 0;
+        }
+
+        .page-wrapper {
+            min-height: 100vh;
+            box-sizing: border-box;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .slider {
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: auto;
+            max-width: 62rem;
+        }
+
+        .slide__radio {
+            margin: 0;
+            appearance: none;
+        }
+
+        .slider__image-wrapper {
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            margin-bottom: 2rem;
+        }
+        .slider__image-container{
+            display: flex;
+            transition: transform .4s linear;
+        }
+
+        .slider__image {
+            width: 100%;
+            min-width: 100%;
+            overflow: hidden;
+            border-radius: 1.8rem;
+            margin-right: 2rem;
+        }
+
+        .slider__label-wrapper {
+            flex-grow: 1;
+            display: flex;
+            overflow: hidden;
+            max-width: calc(100% - 17rem);
+        }
+        .slider__label-container{
+            display: flex;
+            transition: transform .4s linear;
+        }
+        .slider__label {
+            width: 100%;
+            min-width: 100%;
+            margin: 0 1rem 0 0;
+            font-size: 1.8rem;
+            color: #2b2425;
+        }
+        .slider__control-wrapper{
+            display: flex;
+        }
+        .slider__control{
+            width: 4rem;
+            min-width: 4rem;
+            height:  4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        .slider__control-icon{
+            display: inline-block;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: .3rem solid #dd7d13;
+            background-color: #dd7d13;
+            transition: background-color .3s linear, border-color .3s linear;
+        }
+        .slider__control:hover .slider__control-icon, .slider__control:active .slider__control-icon{
+            border-color: #f3e138;
+            background-color: #f3e138;
+        }
+
+        #slide1:checked ~ .slider__control-wrapper [for="slide1"] .slider__control-icon{
+            background-color: transparent;
+        }
+        #slide2:checked ~ .slider__control-wrapper [for="slide2"] .slider__control-icon{
+            background-color: transparent;
+        }
+        #slide3:checked ~ .slider__control-wrapper [for="slide3"] .slider__control-icon{
+            background-color: transparent;
+        }
+        #slide4:checked ~ .slider__control-wrapper [for="slide4"] .slider__control-icon{
+            background-color: transparent;
+        }
+
+        #slide1:checked ~ .slider__image-wrapper .slider__image-container{
+            transform: translateX(0);
+        }
+        #slide2:checked ~ .slider__image-wrapper .slider__image-container{
+            transform: translateX(calc(-100% - 2rem));
+        }
+        #slide3:checked ~ .slider__image-wrapper .slider__image-container{
+            transform: translateX(calc(-200% - 4rem));
+        }
+        #slide4:checked ~ .slider__image-wrapper .slider__image-container{
+            transform: translateX(calc(-300% - 6rem));
+        }
+
+        #slide1:checked ~ .slider__label-wrapper .slider__label-container{
+            transform: translateX(0);
+        }
+        #slide2:checked ~ .slider__label-wrapper .slider__label-container{
+            transform: translateX(calc(-100% - 1rem));
+        }
+        #slide3:checked ~ .slider__label-wrapper .slider__label-container{
+            transform: translateX(calc(-200% - 2rem));
+        }
+        #slide4:checked ~ .slider__label-wrapper .slider__label-container{
+            transform: translateX(calc(-300% - 3rem));
+        }
+
+        @media screen and (max-aspect-ratio: 2 / 1) {
+            html {
+                font-size: .6vw;
+            }
+        }
+        @media screen and (max-aspect-ratio: 16 / 9) {
+            html {
+                font-size: .7vw;
+            }
+        }
+        @media screen and (max-aspect-ratio: 8 / 5) {
+            html {
+                font-size: .75vw;
+            }
+        }
+        @media screen and (max-aspect-ratio: 3 / 2) {
+            html {
+                font-size: .8vw;
+            }
+        }
+        @media screen and (max-aspect-ratio: 4 / 3) {
+            html {
+                font-size: .93vw;
+            }
+        }
+        @media screen and (max-aspect-ratio: 10 / 9) {
+            html {
+                font-size: 1.1vw;
+            }
+        }
+        @media screen and (max-aspect-ratio: 1 / 1) {
+            html {
+                font-size: 1.25vw;
+            }
+        }
+        @media screen and (max-aspect-ratio: 4 / 5){
+            html {
+                font-size: 1.5vw;
+            }
+        }
+        @media screen and (max-aspect-ratio: 4 / 5) and (max-width: 767px) {
+            .slider__control-wrapper{
+                margin-bottom: 2rem;
+                width: 100%;
+                justify-content: center;
+            }
+            .slider__label-wrapper{
+                order: 1;
+                margin: 0;
+                max-width: 100%;
+            }
+           .slider__label{
+               font-size: 2rem;
+            }
+        }
+        @media screen and (max-aspect-ratio: 3 / 4) and (max-width: 767px)  {
+            .slider__image-wrapper{
+                margin-bottom: 3rem;
+            }
+            .slider__control-wrapper{
+                margin-bottom: 3rem;
+            }
+            .slider__control{
+                width: 5rem;
+                min-width:  5rem;
+                height:  5rem;
+            }
+            .slider__control-icon {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+            .slider__label{
+                font-size: 3rem;
+            }
+        }
+        @media screen and (max-aspect-ratio:  1 / 2) and (max-width: 767px)  {
+            .slider__label{
+                font-size: 3.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="slider">
+        <input type="radio" name="slide" class="slide__radio" id="slide1" checked>
+        <input type="radio" name="slide" class="slide__radio" id="slide2">
+        <input type="radio" name="slide" class="slide__radio" id="slide3">
+        <input type="radio" name="slide" class="slide__radio" id="slide4">
+        <div class="slider__image-wrapper">
+            <div class="slider__image-container">
+                <div class="slider__image">
+                    <img src="images/slide1.jpg" alt="meme1" class="image">
+                </div>
+                <div class="slider__image">
+                    <img src="images/slide2.jpg" alt="meme1" class="image">
+                </div>
+                <div class="slider__image">
+                    <img src="images/slide3.jpg" alt="meme1" class="image">
+                </div>
+                <div class="slider__image">
+                    <img src="images/slide4.jpg" alt="meme1" class="image">
+                </div>
+            </div>
+        </div>
+        <div class="slider__label-wrapper">
+            <div class="slider__label-container">
+                <p class="slider__label">Every Newbie in Programming World</p>
+                <p class="slider__label">HTML + CSS + JavaScript</p>
+                <p class="slider__label">Full stack JS Gang</p>
+                <p class="slider__label">Enter your phone number</p>
+            </div>
+        </div>
+        <div class="slider__control-wrapper">
+            <label for="slide1" class="slider__control">
+                <i class="slider__control-icon"></i>
+            </label>
+            <label for="slide2" class="slider__control">
+                <i class="slider__control-icon"></i>
+            </label>
+            <label for="slide3" class="slider__control">
+                <i class="slider__control-icon"></i>
+            </label>
+            <label for="slide4" class="slider__control">
+                <i class="slider__control-icon"></i>
+            </label>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
